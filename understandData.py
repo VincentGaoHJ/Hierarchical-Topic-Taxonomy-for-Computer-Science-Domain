@@ -1,8 +1,8 @@
 pd = dict()
 pd['data_dir'] = './raw_data/'
-# pd['index'] = pd['data_dir'] + 'index.txt'
+pd['index'] = pd['data_dir'] + 'index.txt'
 pd['keyword_cnt'] = pd['data_dir'] + 'keyword_cnt.txt'
-# pd['keywords'] = pd['data_dir'] + 'keywords.txt'
+pd['keywords'] = pd['data_dir'] + 'keywords.txt'
 pd['papers'] = pd['data_dir'] + 'papers.txt'
 
 
@@ -17,6 +17,7 @@ for key in pd.keys():
         index = index + 1
         linea = linea.replace("\n", "")
         print(linea)
-        if index == 1000:
+        if index == 10:
             break
     fpa.close()
+
