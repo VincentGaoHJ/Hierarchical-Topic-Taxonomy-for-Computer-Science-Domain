@@ -8,7 +8,7 @@
 
 def get_set_geo():
     set_geo = set()
-    with open("data\\keywords.txt", 'r') as file_to_read:
+    with open("data\\new_keywords.txt", 'r') as file_to_read:
         item = file_to_read.readline()
         while item:
             set_geo.add(item[:-1])

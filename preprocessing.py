@@ -6,12 +6,14 @@
 """
 
 import csv
+
 import nltk
 
 paper_path = './raw_data/papers.txt'
 keyword_path = './raw_data/keywords.txt'
 result_path = "./raw_data/0.csv"
 new_keyword_path = './raw_data/new_keywords.txt'
+
 keyword_set = set()
 with open(keyword_path, 'r') as file:
     for linea in file.readlines():
@@ -65,7 +67,8 @@ for sentence in list:
             remain.append(item[0])
 
     sente = " ".join(remain)
-    if len(sente) != 0:
+    # if len(sente) != 0:
+    if sente.find("information_retrieval") != -1:
         remain_sentence.append(sente)
 
 

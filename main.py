@@ -5,12 +5,13 @@
 @Description: 
 """
 
+import datetime
 import os
 import shutil
-import datetime
-from visualize import visualize
+
 from corpus_seed import corpus_seed
 from corpus_split import corpus_split
+from visualize import visualize
 
 
 def create_dir(data_path, rootNode):
@@ -24,6 +25,8 @@ def create_dir(data_path, rootNode):
     folder = os.path.join(root, nowTime)
     # 创建文件夹
     os.makedirs(folder)
+
+    # shutil.copy(os.path.join(data_path, rootNode + ".csv"), folder)
 
     shutil.copy(os.path.join(data_path, rootNode + ".csv"), folder)
 
@@ -55,12 +58,12 @@ def iteration(data_path, rootNode, used_word):
 
 
 def main(data_path, rootNode):
-    MAX_LEVEL = 2
+    MAX_LEVEL = 5
 
     folder = create_dir(data_path, rootNode)
     print(folder)
 
-    used_word = []
+    used_word = ["information_retrieval", "information", "model", "method"]
     for level in range(MAX_LEVEL):
         print('\n================================== Running level ', level, ' ==================================\n')
         iteration(folder, rootNode, used_word)

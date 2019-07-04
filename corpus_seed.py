@@ -5,11 +5,13 @@
 @Description: 
 """
 
-import os
 import csv
+import os
+from collections import Counter
+
 import math
 import numpy as np
-from collections import Counter
+
 from geo_classify import get_classify
 
 
@@ -20,8 +22,8 @@ def CountWord(comment_sentence):
     :param POI: POI字符串
     :return:
     """
-    comment = "/".join(comment_sentence)
-    doc = comment.split('/')
+    comment = " ".join(comment_sentence)
+    doc = comment.split(' ')
     c = Counter(doc)
     cnt = []
     for k, v in c.items():
@@ -115,7 +117,7 @@ def judge_entropy(geo_left, user_geo, item, count_cha):
     entropy_before = calc_ent(en_before)
     entropy_after = calc_ent(en_after)
     entropy_parity = entropy_after - entropy_before
-    print(entropy_parity)
+    # print(entropy_parity)
 
     # 加此判断因为最开始的时候只有一个可能的值，熵增依旧为零
     if geo_left:
@@ -143,7 +145,7 @@ def judge_entropy(geo_left, user_geo, item, count_cha):
         # print("{} 与 {} 的互信息量 {}".format(item, poi, mutual_information))
         if mutual_information >= 0:
             count_hu += 1
-            print("{} 不为独立景点，因为与 {} 的互信息量大 {}".format(item, poi, mutual_information))
+            print("{} 与 {} 互信息量 {}".format(item, poi, mutual_information))
 
     if count_hu >= 1:
         print("[结论] {} 不为独立景点，因为与之前 {} 个景点的互信息量大".format(item, count_hu))
@@ -157,11 +159,11 @@ def judge_entropy(geo_left, user_geo, item, count_cha):
 def find_seed(user_cut, geo_noun):
     user_geo = []
     for sentence in user_cut:
-        word_list = sentence.split('/')
+        word_list = sentence.split(' ')
         res = list(set(geo_noun).intersection(set(word_list)))
         if res:
             user_geo.append(res)
-    print(user_geo)
+    # print(user_geo)
     geo_left = []  # 用于保存留下的用于继续分裂的景点
     geo_conclude = []  # 用于保存当前判断的景点
     count_before = 0  # 不包含当前景点的计数
@@ -186,6 +188,7 @@ def find_seed(user_cut, geo_noun):
 
         count_after = i
         count_cha = count_after - count_before
+        # print(count_after, count_before)
         prob = count_cha / appear
 
         # geo_left = judge_num(geo_left, count_cha, appear, item, prob, chongfu)
@@ -202,13 +205,13 @@ def corpus_seed(data_path, fileNode, used_word):
     print('\n==========================\n Running Node  ', fileNode, '\n==========================')
 
     user_cut = generate_sentences(data_path, fileNode)
-    print("景点文章：", user_cut[:3])
+    print("文章：", user_cut[:3])
 
     sort_Word = CountWord(user_cut)
-    print("景点名词：", sort_Word[:10])
+    print("名词：", sort_Word[:10])
 
     geo_noun, non_geo_noun = get_classify(sort_Word, used_word)
-    print("地理名词集合 {}".format(geo_noun))
+    print("术语名词集合 {}".format(geo_noun))
     print("特征名词集合 {}".format(non_geo_noun))
 
     geo_noun = find_seed(user_cut, geo_noun)
