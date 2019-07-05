@@ -8,7 +8,7 @@
 
 def get_set_geo():
     set_geo = set()
-    with open("data\\new_keywords.txt", 'r') as file_to_read:
+    with open("data\\concept_ccs_new.txt", 'r') as file_to_read:
         item = file_to_read.readline()
         while item:
             set_geo.add(item[:-1])
@@ -29,7 +29,7 @@ def get_classify(user_cut, used_word):
         else:
             non_geo_noun.append(item[0])
 
-    return geo_noun[:10], non_geo_noun[:10]
+    return geo_noun[:30], non_geo_noun[:10]
 
 
 if __name__ == '__main__':

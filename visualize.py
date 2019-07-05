@@ -86,7 +86,7 @@ def gen_node_label(node_id, node_content):
     keywords = '\\n'.join(node_content)
 
     if node_id == "*":
-        return '{%s|%s}' % ("information_retrieval", keywords)
+        return '{%s|%s}' % ("Computer", keywords)
 
     if len(node_content) == 0:
         return node_name
@@ -116,8 +116,10 @@ def visualize(dir):
     main(result_file, dir + "\\Computer-" + dir[-14:-6] + '-our-overall-3', min_level=0, max_level=2)
     main(result_file, dir + "\\Computer-" + dir[-14:-6] + '-our-overall-4', min_level=0, max_level=3)
     main(result_file, dir + "\\Computer-" + dir[-14:-6] + '-our-overall-5', min_level=0, max_level=4)
+    # main(result_file, dir + "\\Computer-" + dir[-14:-6] + '-our-overall-6', min_level=0, max_level=5)
+    # main(result_file, dir + "\\Computer-" + dir[-14:-6] + '-our-overall-7', min_level=0, max_level=6)
 
 
 if __name__ == '__main__':
-    dir = "2019-07-01-19-46-09"
+    dir = "2019-07-05-17-09-48"
     visualize(dir)

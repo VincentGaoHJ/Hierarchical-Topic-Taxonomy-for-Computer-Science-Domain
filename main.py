@@ -58,12 +58,14 @@ def iteration(data_path, rootNode, used_word):
 
 
 def main(data_path, rootNode):
-    MAX_LEVEL = 5
+    MAX_LEVEL = 10
 
     folder = create_dir(data_path, rootNode)
     print(folder)
 
-    used_word = ["information_retrieval", "information", "model", "method"]
+    # used_word = ["information_retrieval", "information", "model", "method"]
+    # used_word = ["information_retrieval"]
+    used_word = []
     for level in range(MAX_LEVEL):
         print('\n================================== Running level ', level, ' ==================================\n')
         iteration(folder, rootNode, used_word)

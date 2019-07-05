@@ -103,7 +103,7 @@ def judge_num(geo_left, count_cha, appear, item, prob, chongfu):
 
 
 def judge_entropy(geo_left, user_geo, item, count_cha):
-    if count_cha < 10:
+    if count_cha < 1:
         print("[结论] {} 不为独立景点，因为单独出现的总数 {} 不够".format(item, count_cha))
         return geo_left
 
@@ -121,7 +121,7 @@ def judge_entropy(geo_left, user_geo, item, count_cha):
 
     # 加此判断因为最开始的时候只有一个可能的值，熵增依旧为零
     if geo_left:
-        if entropy_parity <= 0.15:
+        if entropy_parity <= 0.05:
             print("[结论] {} 不为独立景点，因为熵增量 {} 不够".format(item, entropy_parity))
             return geo_left
 
@@ -143,7 +143,7 @@ def judge_entropy(geo_left, user_geo, item, count_cha):
         mutual_information = total * both / (num_poi * num_item)
         mutual_information = math.log2(mutual_information)
         # print("{} 与 {} 的互信息量 {}".format(item, poi, mutual_information))
-        if mutual_information >= 0:
+        if mutual_information >= -0.05:
             count_hu += 1
             print("{} 与 {} 互信息量 {}".format(item, poi, mutual_information))
 
